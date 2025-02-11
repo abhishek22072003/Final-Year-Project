@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Page3 = () => {
   const [userData, setUserData] = useState({
     targetBody: "",
     fitnessGoal: "",
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     // Retrieve the existing data from localStorage
@@ -35,7 +37,8 @@ const Page3 = () => {
   
     try {
       const response = await axios.post("http://localhost:8000/api/users/register/", completeUserData);
-      console.log("Success Response:", response.data);
+      alert("The User registered Successfully");
+      navigate("../login");
     } catch (error) {
       console.error("Error Response:", error.response ? error.response.data : error.message);
     }
